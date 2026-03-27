@@ -1,0 +1,417 @@
+# =============================================================================
+# Supervisor Agent — Complete Requirements
+# =============================================================================
+# This file lists ALL dependencies needed to run the supervisor_agent and its
+# tightly-coupled sub-agents (reporting_pipeline_agent, drug_agent, streamlit_app).
+#
+# Python version: >=3.10, <3.13
+#
+# Generated from deep code analysis of every import across the codebase.
+# Versions are pinned to match the project's pyproject.toml where available.
+# =============================================================================
+
+
+# ---------------------------------------------------------------------------
+# 1. LLM & AI Orchestration
+# ---------------------------------------------------------------------------
+# LangGraph — graph-based multi-agent workflow orchestration (core of supervisor)
+langgraph>=0.6.8
+
+# LangGraph PostgreSQL checkpointer (optional: used when CHECKPOINTER_BACKEND=postgres)
+langgraph-checkpoint-postgres>=2.0.0
+
+# LangChain Core — RunnableConfig used in langgraph/nodes.py & entry.py
+langchain-core>=0.3.0
+
+# LangChain ecosystem (used across platform for LLM integrations)
+langchain>=0.3.27
+langchain-community>=0.3.31
+langchain-openai>=0.3.35
+
+# OpenAI Python SDK (LLM provider backend)
+openai>=1.86.0
+
+# OpenAI Agents SDK
+openai-agents>=0.0.17
+
+# Tiktoken — tokenizer for OpenAI models
+tiktoken>=0.9.0
+
+# Sentence Transformers — PubMedBERT embeddings (drug_agent/embedding, opentargets)
+sentence-transformers>=4.1.0
+
+# Hugging Face Transformers — model backbone for sentence-transformers
+transformers>=4.52.4
+
+# PyTorch — tensor backend for embeddings and ML models
+torch>=2.7.1
+
+
+# ---------------------------------------------------------------------------
+# 2. Data Processing & Scientific Computing
+# ---------------------------------------------------------------------------
+# Pandas — DataFrames used extensively in all agents
+pandas>=2.3.0
+
+# NumPy — numerical operations (reporting_pipeline_agent, drug_agent/service)
+# Pinned <2.0 for pandasai compatibility
+numpy>=1.26.0,<2.0.0
+
+# SciPy — scientific computing (required by pydeseq2, overridden from pandasai pin)
+scipy>=1.12.0
+
+
+# ---------------------------------------------------------------------------
+# 3. HTTP Clients & Networking
+# ---------------------------------------------------------------------------
+# HTTPX — async HTTP client (api_adapters/base.py, drug_agent/opentargets)
+httpx>=0.24.0
+
+# Requests — sync HTTP (reporting_pipeline_agent/llm_knowledge, drug_agent/fda, clinicaltrials, opentargets)
+requests>=2.32.4
+
+# Aiohttp — async HTTP (reporting_pipeline_agent/disease_knowledge.py)
+aiohttp>=3.12.13
+
+# Aiofiles — async file I/O
+aiofiles>=24.1.0
+
+
+# ---------------------------------------------------------------------------
+# 4. Vector Database & Search
+# ---------------------------------------------------------------------------
+# Qdrant Client — vector similarity search (drug_agent/storage, service, opentargets)
+qdrant-client>=1.7.0
+
+
+# ---------------------------------------------------------------------------
+# 5. Data Validation & Configuration
+# ---------------------------------------------------------------------------
+# Pydantic — data models/schemas (data_layer/schemas, api_adapters/config)
+pydantic>=2.11.6
+
+# Pydantic Settings — environment-aware configuration
+pydantic-settings>=2.9.1
+
+# Python-dotenv — .env file loading (supervisor.py, llm_provider.py, drug_agent, streamlit_app)
+python-dotenv>=1.0.0
+
+# PyYAML — YAML config parsing (drug_agent/config/settings.py, chembl config)
+pyyaml>=6.0.1
+
+
+# ---------------------------------------------------------------------------
+# 6. Document Generation & Rendering
+# ---------------------------------------------------------------------------
+# Jinja2 — template engine (reporting_engine/renderers/markdown_renderer.py)
+jinja2>=3.1.0
+
+# Markdown — HTML rendering from markdown (response/document_renderer.py)
+markdown>=3.5
+
+# Python-docx — DOCX report generation (reporting_pipeline_agent/docx_generation.py)
+python-docx>=0.8.11
+
+# htmldocx — HTML to DOCX conversion
+htmldocx>=0.0.6
+
+# WeasyPrint — HTML/CSS to PDF rendering
+weasyprint>=65.1
+
+# FPDF2 — lightweight PDF generation
+fpdf2>=2.7.0
+
+# ReportLab — advanced PDF generation
+reportlab>=4.4.2
+
+# Graphviz — graph/diagram visualization
+graphviz>=0.21
+
+# Tabulate — tabular data formatting
+tabulate>=0.9.0
+
+# Kaleido — static image export for Plotly charts
+kaleido>=1.0.0
+
+
+# ---------------------------------------------------------------------------
+# 7. Visualization
+# ---------------------------------------------------------------------------
+# Plotly — interactive charts and visualizations
+plotly>=6.2.0
+
+# Matplotlib — static plotting
+matplotlib>=3.7.1,<3.8
+
+# Seaborn — statistical visualization
+seaborn>=0.12.2,<0.13.0
+
+
+# ---------------------------------------------------------------------------
+# 8. Web UI & API Framework
+# ---------------------------------------------------------------------------
+# Streamlit — web application UI (streamlit_app/app.py)
+streamlit>=1.28.0
+
+# FastAPI — REST API framework
+fastapi>=0.115.12
+
+# Uvicorn — ASGI server for FastAPI
+uvicorn[standard]>=0.34.3
+
+
+# ---------------------------------------------------------------------------
+# 9. Database & Infrastructure
+# ---------------------------------------------------------------------------
+# PostgreSQL adapter (used by langgraph checkpointer in production)
+psycopg2-binary>=2.9.10
+
+# Redis client (caching, task queue backend)
+redis>=6.2.0
+
+# Celery — distributed task queue
+celery>=5.5.3
+
+# Flower — Celery monitoring dashboard
+flower>=2.0.1
+
+# Neo4j — graph database client
+neo4j>=5.28.1
+
+
+# ---------------------------------------------------------------------------
+# 10. Django Backend Stack
+# ---------------------------------------------------------------------------
+django>=5.2.3
+django-admin-interface>=0.30.1
+django-auditlog>=3.1.2
+django-cors-headers>=4.7.0
+django-encrypted-model-fields>=0.6.5
+django-filter>=25.1
+django-import-export>=4.3.7
+django-ratelimit>=4.1.0
+django-redis>=6.0.0
+django-storages>=1.14.6
+djangorestframework>=3.16.0
+djangorestframework-simplejwt>=5.5.0
+drf-yasg>=1.21.10
+drf-spectacular>=0.29.0
+whitenoise>=6.9.0
+
+
+# ---------------------------------------------------------------------------
+# 11. Bioinformatics & Genomics
+# ---------------------------------------------------------------------------
+# Scanpy — single-cell RNA-seq analysis pipeline
+scanpy>=1.9.0,<1.10.0
+
+# AnnData — annotated data structure for single-cell data
+anndata>=0.10.0,<0.11.0
+
+# PyDESeq2 — differential gene expression analysis
+pydeseq2>=0.5.1
+
+# BioPython — molecular biology toolkit
+biopython>=1.85
+
+# MyGene — gene annotation API client
+mygene>=3.2.2
+
+# CellxGene Census — single-cell atlas access
+cellxgene-census>=1.17.0
+
+# ChEMBL Web Resource Client — ChEMBL database API
+chembl-webresource-client>=0.10.9
+
+# GSEA — Gene Set Enrichment Analysis
+gseapy>=1.1.11
+
+# Decoupler — pathway activity inference
+decoupler>=2.1.2
+
+# CellTypist — cell type annotation
+celltypist>=1.7.1
+
+# OmniPath — pathway database access
+omnipath>=1.0.12
+
+# PertPy — perturbation analysis
+pertpy==0.10.0
+
+# Scrublet — doublet detection in single-cell data
+scrublet>=0.2.3
+
+# PyBayesPrism — Bayesian deconvolution
+pybayesprism>=0.1.0
+
+# RPy2 — R language integration
+rpy2>=3.6.2
+
+# PySAM — SAM/BAM/VCF file access
+pysam>=0.23.3
+
+# Harmony — batch correction
+harmonypy>=0.2.0
+
+# BBKNN — batch-balanced KNN
+bbknn>=1.6.0
+
+# Leiden algorithm — graph clustering
+leidenalg>=0.11.0
+
+# iGraph — graph/network analysis
+igraph>=1.0.0
+
+# Scikit-misc — miscellaneous scientific utilities
+scikit-misc>=0.5.2
+
+# CMap — Connectivity Map tools
+cmappy>=4.0.1
+
+
+# ---------------------------------------------------------------------------
+# 12. Machine Learning & Statistics
+# ---------------------------------------------------------------------------
+# Scikit-learn — general ML algorithms
+scikit-learn>=1.7.0
+
+# Statsmodels — statistical modeling
+statsmodels>=0.14.5
+
+# XGBoost — gradient boosting
+xgboost>=3.2.0
+
+# SHAP — model explainability
+shap>=0.49.1
+
+# UMAP — dimensionality reduction
+umap-learn>=0.5.9.post2
+
+# PGMpy — probabilistic graphical models
+pgmpy>=1.0.0
+
+# FAISS — vector similarity search (CPU version)
+faiss-cpu>=1.11.0
+
+
+# ---------------------------------------------------------------------------
+# 13. Cloud & Storage
+# ---------------------------------------------------------------------------
+# AWS SDK
+boto3>=1.40.61
+
+# Stripe — payment processing
+stripe>=12.2.0
+
+# Google API ecosystem
+google-api-core>=2.25.1
+google-api-python-client>=2.172.0
+google-auth>=2.40.3
+google-auth-httplib2>=0.2.0
+google-auth-oauthlib>=1.2.2
+google-genai>=1.22.0
+googleapis-common-protos>=1.70.0
+
+
+# ---------------------------------------------------------------------------
+# 14. Utilities & Miscellaneous
+# ---------------------------------------------------------------------------
+# Progress bars
+tqdm>=4.67.1
+
+# Rich terminal output
+rich>=14.2.0
+
+# Python-decouple — config management
+python-decouple>=3.8
+
+# PyVis — interactive network visualization
+pyvis>=0.3.2
+
+# adjustText — matplotlib text annotation adjustment
+adjusttext>=1.3.0
+
+# Matplotlib-venn — Venn diagrams
+matplotlib-venn>=1.1.2
+
+# lxml — XML/HTML processing
+lxml>=6.0.2
+
+# XML to dict conversion
+xmltodict>=0.14.2
+
+# FuzzyWuzzy — fuzzy string matching
+fuzzywuzzy>=0.18.0
+
+# Python-Levenshtein — fast string distance (backend for fuzzywuzzy)
+python-levenshtein>=0.27.1
+
+# JSON serialization utilities
+jsons>=1.6.3
+
+# IceCream — debug printing
+icecream>=2.1.4
+
+# PyPDF — PDF manipulation
+pypdf>=3.0.0
+
+# Polars — fast DataFrame library
+polars>=1.35.1
+
+# OpenPyXL — Excel read/write
+openpyxl>=3.1.5
+
+# xlrd — legacy Excel reading
+xlrd>=2.0.2
+
+# XlsxWriter — Excel file generation
+xlsxwriter>=3.2.9
+
+# GEOparse — NCBI GEO data parsing
+geoparse>=2.0.4
+
+# US states metadata
+us>=3.2.0
+
+# Email validation
+py3-validate-email>=1.0.5.post2
+
+
+# ---------------------------------------------------------------------------
+# 15. Authentication & Security
+# ---------------------------------------------------------------------------
+# JWT tokens
+python-jose>=3.5.0
+pyjwt>=2.8.0
+
+
+# ---------------------------------------------------------------------------
+# 16. Browser Automation (data ingestion pipelines)
+# ---------------------------------------------------------------------------
+selenium>=4.33.0
+selenium-stealth>=1.0.6
+playwright>=1.57.0
+
+
+# ---------------------------------------------------------------------------
+# 17. DevOps & Deployment
+# ---------------------------------------------------------------------------
+# SSH/remote execution
+fabric>=3.2.2
+
+
+# ---------------------------------------------------------------------------
+# 18. AI Data Analysis
+# ---------------------------------------------------------------------------
+# PandasAI — AI-powered DataFrame analysis
+# NOTE: Install from GitHub main branch for latest fixes:
+#   pip install "pandasai @ git+https://github.com/Sinaptik-AI/pandas-ai.git@main"
+pandasai>=3.0.0
+pandasai-litellm>=0.0.1
+
+
+# ---------------------------------------------------------------------------
+# 19. Testing & Development
+# ---------------------------------------------------------------------------
+pytest>=8.4.1
+jupyterlab>=4.4.5

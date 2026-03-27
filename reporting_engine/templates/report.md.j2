@@ -1,0 +1,28 @@
+# {{ title }}
+{% if disease %}
+*Disease context: {{ disease }}*
+{% endif %}
+{% for section in sections %}
+
+{{ '#' * section.level }} {{ section.title }}
+
+{% if section.body %}
+{{ section.body }}
+{% endif %}
+{% for table in section.tables %}
+
+{{ table | table_md }}
+
+{% endfor %}
+{% if not loop.last %}
+---
+{% endif %}
+{% endfor %}
+{% if conflicts %}
+
+## Cross-Module Conflicts
+
+{% for c in conflicts %}
+- **{{ c.module_a }}** vs **{{ c.module_b }}**: {{ c.description }}
+{% endfor %}
+{% endif %}

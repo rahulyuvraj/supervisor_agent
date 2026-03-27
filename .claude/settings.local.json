@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(find /home/wrahul/projects/agenticaib/agentic_ai_wf/supervisor_agent -type f \\\\\\(-name *.csv -o -name *.xlsx -o -name *.xls \\\\\\))",
+      "Bash(grep -E \"\\\\.\\(csv|xlsx|xls\\)$\")",
+      "Bash(ls:*)",
+      "WebSearch",
+      "Bash(find /home/wrahul/projects/agenticaib -name requirements*.txt -o -name setup.py -o -name setup.cfg -o -name poetry.lock -o -name Pipfile -o -name pyproject.toml)"
+    ]
+  }
+}
