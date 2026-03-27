@@ -1,0 +1,40 @@
+{
+  "Sarcoidosis": {
+    "key_pathways": [
+      "Toll-like receptor signaling pathway",
+      "TNF signaling pathway",
+      "JAK-STAT signaling pathway",
+      "NF-kappa B signaling pathway",
+      "T-cell receptor signaling pathway",
+      "B-cell receptor signaling pathway",
+      "IL-17 signaling pathway",
+      "MAPK signaling pathway",
+      "PI3K-Akt signaling pathway",
+      "Apoptosis pathway"
+    ],
+    "molecular_features": [
+      "Elevated angiotensin-converting enzyme (ACE) levels",
+      "Increased serum calcium levels",
+      "Presence of non-caseating granulomas",
+      "HLA-DRB1 alleles association",
+      "Increased CD4/CD8 ratio in bronchoalveolar lavage",
+      "Increased levels of TNF-alpha",
+      "Elevated IL-2 receptor levels",
+      "Increased IL-12 and IL-18 levels",
+      "Presence of macrophage inflammatory protein-1 alpha",
+      "Elevated serum amyloid A protein"
+    ],
+    "therapeutic_targets": [
+      "TNF-alpha inhibitors",
+      "IL-6 inhibitors",
+      "JAK inhibitors",
+      "Corticosteroids",
+      "Methotrexate",
+      "Azathioprine",
+      "Mycophenolate mofetil",
+      "Anti-CD20 monoclonal antibodies"
+    ],
+    "disease_category": "autoimmune",
+    "source": "generated"
+  }
+}

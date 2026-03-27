@@ -1,0 +1,3 @@
+[server]
+maxUploadSize = 25000  # 25 GB — FASTQ files can be 18+ GB
+maxMessageSize = 25000
